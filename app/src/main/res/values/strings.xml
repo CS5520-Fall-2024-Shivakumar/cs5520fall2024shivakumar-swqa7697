@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">NUMAD24Fa_ShuzhanXie</string>
     <string name="btn_assignment_1">About Me</string>
+    <string name="btn_assignment_3">Quick Calc</string>
+    <!-- Labels For Quick Calc -->
+    <string name="calc_handler">CALC</string>
+    <string name="calc_btn_0">0</string>
+    <string name="calc_btn_1">1</string>
+    <string name="calc_btn_2">2</string>
+    <string name="calc_btn_3">3</string>
+    <string name="calc_btn_4">4</string>
+    <string name="calc_btn_5">5</string>
+    <string name="calc_btn_6">6</string>
+    <string name="calc_btn_7">7</string>
+    <string name="calc_btn_8">8</string>
+    <string name="calc_btn_9">9</string>
+    <string name="calc_btn_addition">+</string>
+    <string name="calc_btn_subtraction">-</string>
+    <string name="calc_btn_multiplication">×</string>
+    <string name="calc_btn_equal">=</string>
 </resources>

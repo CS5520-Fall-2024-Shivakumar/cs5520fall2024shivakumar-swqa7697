@@ -1,5 +1,6 @@
 package edu.nu.numad24fa_shuzhanxie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -29,5 +30,10 @@ public class MainActivity extends AppCompatActivity {
                 getApplicationContext(),
                 "Name: Shuzhan Xie\nEmail: xie.shuz@northeastern.edu",
                 Toast.LENGTH_LONG).show();
+    }
+
+    public void calcActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, CalcActivity.class);
+        startActivity(intent);
     }
 }

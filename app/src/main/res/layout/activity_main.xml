@@ -5,28 +5,44 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/default_bg"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_hello_world"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_about_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="aboutMeToast"
         android:text="@string/btn_assignment_1"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.321"
-        android:onClick="aboutMeToast" />
+        app:layout_constraintTop_toBottomOf="@+id/text_hello_world"
+        app:layout_constraintVertical_bias="0.24" />
+
+    <Button
+        android:id="@+id/button_quick_calc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="calcActivity"
+        android:text="@string/btn_assignment_3"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_about_me"
+        app:layout_constraintVertical_bias="0.24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
