@@ -16,6 +16,6 @@
     <string name="calc_btn_9">9</string>
     <string name="calc_btn_addition">+</string>
     <string name="calc_btn_subtraction">-</string>
-    <string name="calc_btn_multiplication">×</string>
+    <string name="calc_btn_backspace">×</string>
     <string name="calc_btn_equal">=</string>
 </resources>
