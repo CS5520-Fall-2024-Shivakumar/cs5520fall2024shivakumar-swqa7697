@@ -1,11 +1,14 @@
 package edu.nu.numad24fa_shuzhanxie;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,17 +22,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.nu.numad24fa_shuzhanxie.adapter.ContactAdapter;
 import edu.nu.numad24fa_shuzhanxie.models.Contact;
 
 public class ContactsCollectorActivity extends AppCompatActivity {
+    private static final String CONTACT_STORAGE_PATH = "contacts.json";
+
     private List<Contact> contacts;
     private ContactAdapter contactAdapter;
     private RecyclerView recyclerView;
+    private TextView noContactIndicator;
+    private final Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +57,19 @@ public class ContactsCollectorActivity extends AppCompatActivity {
             return insets;
         });
 
-        contacts = new ArrayList<>();
         recyclerView = findViewById(R.id.recycler_view_contacts);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        noContactIndicator = findViewById(R.id.text_no_contact);
+
+        // Initialize contacts
+        contacts = new ArrayList<>();
+        loadContacts();
+        toggleNoContactIndicator();
 
         contactAdapter = new ContactAdapter(contacts, this::makeCall, this::showModifyContactDialog);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(contactAdapter);
 
+        // Set onClick listener for add contact button
         FloatingActionButton fab = findViewById(R.id.fab_contact_add);
         fab.setOnClickListener(v -> showAddContactDialog());
     }
@@ -98,12 +119,16 @@ public class ContactsCollectorActivity extends AppCompatActivity {
         contacts.add(contact);
         int contactPos = contacts.size() - 1;
         contactAdapter.notifyItemInserted(contactPos);
+        toggleNoContactIndicator();
+        storeContacts();
         return contactPos;
     }
 
     private void addContact(Contact contact, int contactPos) {
         contacts.add(contactPos, contact);
         contactAdapter.notifyItemInserted(contactPos);
+        toggleNoContactIndicator();
+        storeContacts();
     }
 
     private void editContact(int contactPos, String newName, String newPhone) {
@@ -111,6 +136,7 @@ public class ContactsCollectorActivity extends AppCompatActivity {
             contacts.get(contactPos).setName(newName);
             contacts.get(contactPos).setPhone(newPhone);
             contactAdapter.notifyItemChanged(contactPos);
+            storeContacts();
         } else {
             Toast.makeText(this, "Invalid name or phone number",
                     Toast.LENGTH_SHORT).show();
@@ -122,6 +148,8 @@ public class ContactsCollectorActivity extends AppCompatActivity {
             contacts.remove(contactPos);
             contactAdapter.notifyItemRemoved(contactPos);
             contactAdapter.notifyItemRangeChanged(contactPos, contacts.size());
+            toggleNoContactIndicator();
+            storeContacts();
         }
     }
 
@@ -160,5 +188,51 @@ public class ContactsCollectorActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
+    }
+
+    private void storeContacts() {
+        String json = gson.toJson(contacts);
+
+        try (FileOutputStream fos = openFileOutput(CONTACT_STORAGE_PATH, Context.MODE_PRIVATE)) {
+            fos.write(json.getBytes());
+        } catch (IOException e) {
+            Log.e("Contact Collector", "IOException", e);
+        }
+    }
+
+    private void loadContacts() {
+        contacts = new ArrayList<>();
+        File file = new File(getFilesDir(), CONTACT_STORAGE_PATH);
+
+        if (file.exists()) {
+            try (FileInputStream fis = openFileInput(CONTACT_STORAGE_PATH);
+                 InputStreamReader isr = new InputStreamReader(fis);
+                 BufferedReader reader = new BufferedReader(isr)) {
+
+                StringBuilder json = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    json.append(line);
+                }
+
+                Contact[] contactArray = gson.fromJson(json.toString(), Contact[].class);
+                if (contactArray != null) {
+                    contacts = new ArrayList<>(Arrays.asList(contactArray));
+                }
+            } catch (IOException e) {
+                Log.e("Contact Collector", "IOException", e);
+                contacts = new ArrayList<>();
+            }
+        }
+    }
+
+    private void toggleNoContactIndicator() {
+        if (contacts.isEmpty()) {
+            noContactIndicator.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            noContactIndicator.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 }
