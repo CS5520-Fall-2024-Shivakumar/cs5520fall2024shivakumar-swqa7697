@@ -22,20 +22,24 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        findViewById(R.id.button_about_me).setOnClickListener(v -> aboutMeActivity());
+        findViewById(R.id.button_quick_calc).setOnClickListener(v -> calcActivity());
+        findViewById(R.id.button_contacts).setOnClickListener(v -> contactsActivity());
     }
 
-    public void aboutMeActivity(View view) {
+    private void aboutMeActivity() {
         Intent intent = new Intent(MainActivity.this, AboutMeActivity.class);
         startActivity(intent);
     }
 
-    public void calcActivity(View view) {
+    private void calcActivity() {
         Intent intent = new Intent(MainActivity.this, CalcActivity.class);
         startActivity(intent);
     }
 
-    public void contactsActivity(View view) {
-        //Intent intent = new Intent(MainActivity.this, CalcActivity.class);
-        //startActivity(intent);
+    private void contactsActivity() {
+        Intent intent = new Intent(MainActivity.this, ContactsCollectorActivity.class);
+        startActivity(intent);
     }
 }

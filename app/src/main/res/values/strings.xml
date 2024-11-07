@@ -19,4 +19,8 @@
     <string name="calc_btn_subtraction">-</string>
     <string name="calc_btn_backspace">×</string>
     <string name="calc_btn_equal">=</string>
+    <!-- Contacts Collector -->
+    <string name="contacts_btn_add">Add Contact</string>
+    <string name="contacts_dialog_add_name">Enter Name</string>
+    <string name="contacts_dialog_add_phone">Enter Phone Number</string>
 </resources>
