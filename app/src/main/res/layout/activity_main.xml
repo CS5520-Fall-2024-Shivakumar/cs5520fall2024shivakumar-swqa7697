@@ -23,7 +23,7 @@
         android:id="@+id/button_about_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="aboutMeToast"
+        android:onClick="aboutMeActivity"
         android:text="@string/btn_assignment_1"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
