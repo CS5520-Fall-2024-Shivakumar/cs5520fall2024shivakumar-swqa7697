@@ -2,6 +2,7 @@
     <string name="app_name">NUMAD24Fa_ShuzhanXie</string>
     <string name="btn_assignment_1">About Me</string>
     <string name="btn_assignment_3">Quick Calc</string>
+    <string name="btn_assignment_4">Contacts Collector</string>
     <!-- Labels For Quick Calc -->
     <string name="calc_handler">CALC</string>
     <string name="calc_btn_0">0</string>

@@ -33,4 +33,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, CalcActivity.class);
         startActivity(intent);
     }
+
+    public void contactsActivity(View view) {
+        //Intent intent = new Intent(MainActivity.this, CalcActivity.class);
+        //startActivity(intent);
+    }
 }

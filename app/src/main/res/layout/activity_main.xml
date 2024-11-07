@@ -8,6 +8,20 @@
     android:background="@color/default_bg"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_button_area_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.56" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_button_area_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94" />
+
     <TextView
         android:id="@+id/text_hello_world"
         android:layout_width="wrap_content"
@@ -26,11 +40,10 @@
         android:onClick="aboutMeActivity"
         android:text="@string/btn_assignment_1"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_quick_calc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_hello_world"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintTop_toTopOf="@id/guideline_button_area_top" />
 
     <Button
         android:id="@+id/button_quick_calc"
@@ -39,10 +52,21 @@
         android:onClick="calcActivity"
         android:text="@string/btn_assignment_3"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_contacts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_about_me"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintTop_toBottomOf="@id/button_about_me" />
+
+    <Button
+        android:id="@+id/button_contacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="contactsActivity"
+        android:text="@string/btn_assignment_4"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_button_area_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_quick_calc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
